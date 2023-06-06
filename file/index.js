@@ -4,7 +4,7 @@ import {
   extractLinksFromDirectory,
   extractLinksFromFile,
   countLinks,
-} from "../src/myLibrary.js";
+} from "../file/myLibrary.js";
 // Se importa el módulo fs de Node.js y se usa la propiedad promises para acceder a las funciones del módulo que retornan promesas.
 import { promises as fs } from "fs";
 
