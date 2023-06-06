@@ -3,5 +3,30 @@
   "version": "0.1.0",
   "engines": {
     "node": ">=16.x"
+  },
+  "description": "## Índice",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaryToribio/DEV005-md-links.git"
+  },
+  "keywords": [
+    "123456"
+  ],
+  "author": "Maria Toribio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MaryToribio/DEV005-md-links/issues"
+  },
+  "homepage": "https://github.com/MaryToribio/DEV005-md-links#readme",
+  
+  "bin": {
+    "hello": "./bin/index.js"
   }
 }
