@@ -1,16 +1,24 @@
 #!/usr/bin/env node
 
-import {
-  extractLinksFromDirectory,
-  extractLinksFromFile,
-  countLinks,
-} from "../file/myLibrary.js";
-// Se importa el módulo fs de Node.js y se usa la propiedad promises para acceder a las funciones del módulo que retornan promesas.
+ // Se importa el módulo fs de Node.js y se usa la propiedad promises para acceder a las funciones del módulo que retornan promesas.
 import { promises as fs } from "fs";
 
 // Se importa el módulo path de Node.js Este módulo proporciona utilidades para trabajar con rutas de archivos y directorios
 import path from "path";
 
+import {
+  extractLinksFromDirectory,
+  extractLinksFromFile,
+  countLinks,
+} from "../file/library.mjs";
+
+//
+
+const optionTerminal = {
+  validate: process.argv.includes("--validate"), // verifica si se proporcionó la opción --validate
+  stats: process.argv.includes("--stats"), // verifica si se proporcionó la opción --stats
+};
+const filePathTerminal = process.argv[2]; // obtiene el primer argumento después del nombre del archivo
 
 // Se recibe como argumento la ruta de un archivo o directorio y se extraen todos los enlaces presentes en el archivo Markdown, o en el caso de que sea un directorio, se ejecuta la función extractLinksFromDirectory.
 // la función se encarga de extraer los enlaces de un archivo o directorio 
@@ -36,13 +44,6 @@ console.log('absolutePath:',absolutePath);
     throw new Error("La ruta debe ser un archivo Markdown o un directorio.");
   });
 }
-
-const optionTerminal = {
-  validate: process.argv.includes("--validate"), // verifica si se proporcionó la opción --validate
-  stats: process.argv.includes("--stats"), // verifica si se proporcionó la opción --stats
-};
-const filePathTerminal = process.argv[2]; // obtiene el primer argumento después del nombre del archivo
-
 // Llamado a la función mdLinks con una ruta de archivo o directorio
 mdLinks(optionTerminal, filePathTerminal)
   .then((links) => {
@@ -59,3 +60,4 @@ mdLinks(optionTerminal, filePathTerminal)
   .catch((error) => {
     console.error(error);
   });
+
