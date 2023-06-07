@@ -1,22 +1,17 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-// Se importa el módulo axios para hacer peticiones HTTP
+/*módulo axios para hacer peticiones HTTP
+módulo marked para hacer cambio de markdown a HTML
+Se importa el módulo cheerio para crear documento virtual*/
 import axios from "axios";
-
-// Se importa el módulo marked para hacer cambio de markdown a HTML
 import { marked } from "marked";
-
-// Se importa el módulo cheerio para crear documento virtual
 import { load } from "cheerio";
 
 //Extraer los links del archivo markdown
 function extractLinksFromFile(filePath, validate) {
-  // Leer el contenido del archivo en la ruta especificada
   return fs.readFile(filePath, "utf8").then((fileContent) => {
-    // Tomar el contenido del archivo leído y lo convierte a HTML
     const htmlContent = marked(fileContent);
-    // Crear un objeto DOM virtual en memoria del HTML
     const dom = load(htmlContent);
 
     const links = dom("a").map((_,element) => {
@@ -24,8 +19,7 @@ function extractLinksFromFile(filePath, validate) {
         const text = dom(element).text();
         return { href, text };
       })
-      .get(); //.get() convierte el objeto jQuery en una matriz JavaScript simple que contiene los elementos resultantes del método map().
-
+      .get(); 
     if (validate) {
       const linkPromises = links.map((link) => {
         return validateLinks(link, filePath);
@@ -42,7 +36,7 @@ function extractLinksFromFile(filePath, validate) {
   });
 }
 
-// Se recibe como argumento la ruta de un directorio y se encarga de extraer todos los enlaces presentes en los archivos Markdown.
+//la ruta de un directorio y se encarga de extraer todos link archivos Markdown.
 function extractLinksFromDirectory(directoryPath, validate) {
   return fs.readdir(directoryPath).then((files) => {
     const promises = files.map((file) => {
@@ -63,8 +57,7 @@ function extractLinksFromDirectory(directoryPath, validate) {
 
 //Validar el estado de los links encontrados
 function validateLinks(link, filePath) {
-  // Máximo 50 caracteres en el texto
-  const text = link.text.length > 50 ? link.text.substring(0, 50) : link.text;
+  const text = link.text.length > 60 ? link.text.substring(0, 60) : link.text;
 
   return axios
     .head(link.href)
