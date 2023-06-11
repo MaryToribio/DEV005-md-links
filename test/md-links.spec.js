@@ -1,8 +1,9 @@
-import path from 'path';
-import { extractLinksFromFile, extractLinksFromDirectory, validateLinks, countLinks  } from '../src/myLibrary.mjs';
-import { mdLinks } from '../src/index.mjs';
 
-const filePath = '../example/README2.md';
+import path from 'path';
+import { extractLinksFromFile, extractLinksFromDirectory, validateLinks, countLinks  } from '../file/library.mjs';
+import { mdLinks } from '../file/index.mjs';
+
+
 
 describe('extractLinksFromFile', () => {
   it('debería ser una función', () => {
@@ -10,15 +11,9 @@ describe('extractLinksFromFile', () => {
   });
 });
 
-//---------------------------------------------------------//
 
+const filePath = '../test/example/README2.md';
 
-
-
-
-
-
-/*
 //Test para verificar que la extracción de los links de un archivo, se ejecute correctamente 
 describe('extractLinksFromFile', () => {
   it('Devuelve una lista de objetos con href, text y file cuando options.validate es false', () => {
@@ -75,7 +70,7 @@ describe('extractLinksFromFile', () => {
 
   it('Debe encontrar dos links', () => {
     // Definir el archivo de prueba
-    const filePath = './test/test-directory/test-file.md';
+    const filePath = './example/README2.md';
 
     // Definir las opciones
     const options = {
@@ -89,6 +84,7 @@ describe('extractLinksFromFile', () => {
   });
 });
 
+/*
 //Test para verificar que la extracción de los links de todos los archivos dentro de directorios y subdirectorios, se ejecute correctamente 
 describe('extractLinksFromDirectory', () => {
   it('Debe retornar un arreglo con los links de todos los archivos', () => {
