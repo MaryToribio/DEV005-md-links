@@ -1,16 +1,13 @@
 #!/usr/bin/env node
-
-// Módulo fs de Node.js
-import { promises as fs } from "fs";
-
 // Módulo path de Node.js
 import path from "path";
-
+// Módulo fs de Node.js
+import { promises as fs } from "fs";
 import {
   extractLinksFromDirectory,
   extractLinksFromFile,
   countLinks,
-} from "../file/library.mjs";
+} from "./library.mjs";
 
 const optionTerminal = {
   validate: process.argv.includes("--validate"), // Verifica si se proporcionó la opción --validate
@@ -51,5 +48,5 @@ mdLinks(optionTerminal, filePathTerminal)
     }
   })
   .catch((error) => {
-    console.error(error);
+    
   });
