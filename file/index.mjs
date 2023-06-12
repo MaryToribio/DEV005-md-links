@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 // Módulo path de Node.js
 import path from "path";
 // Módulo fs de Node.js
@@ -18,9 +19,9 @@ const filePathTerminal = process.argv[2]; // Obtiene el primer argumento despué
 
 function mdLinks(options, filePath) {
   const absolutePath = path.resolve(process.cwd(), filePath);
-  console.log('absolutePath:', absolutePath);
 
-  return fs.stat(absolutePath)
+  return fs
+    .stat(absolutePath)
     .then((metadata) => {
       if (metadata.isDirectory()) {
         return extractLinksFromDirectory(absolutePath, options.validate);
@@ -35,18 +36,17 @@ function mdLinks(options, filePath) {
     });
 }
 
+export { mdLinks }; // Exporta la función mdLinks
+
+// Ejecución principal del programa
 mdLinks(optionTerminal, filePathTerminal)
   .then((links) => {
     if (optionTerminal.stats) {
       if (optionTerminal.validate) {
-        console.log("links:", links);
       }
-
-      console.log("Stats:", countLinks(links, optionTerminal));
     } else {
-      console.log("Links:", links);
     }
   })
   .catch((error) => {
-    
+    // Manejo de errores
   });
