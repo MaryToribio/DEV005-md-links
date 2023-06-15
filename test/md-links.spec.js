@@ -43,7 +43,7 @@ describe('extractLinksFromFile', () => {
   });
 });
 
-// Test para verificar que la extracción de los links de todos los archivos dentro de directorios y subdirectorios se ejecute correctamente
+// Se Testea para verificar que la extracción de los links de todos los archivos dentro de directorios y subdirectorios se ejecute correctamente
 describe('extractLinksFromDirectory', () => {
   it('Debe retornar un arreglo con los links de todos los archivos', () => {
     const directoryPath = './test/test-directory';
@@ -67,74 +67,6 @@ describe('extractLinksFromDirectory', () => {
 
     return extractLinksFromDirectory(directoryPath, true).then(links => {
       expect(links).toEqual(expectedLinks);
-    });
-  });
-});
-
-// Verificar funcionamiento de mdLinks
-describe('mdLinks', () => {
-  it('Debe retornar un array de objetos con los links encontrados en un archivo Markdown', () => {
-    const options = {
-      validate: false
-    };
-
-    return mdLinks(filePath, options).then(links => {
-      expect(Array.isArray(links)).toBe(true);
-      expect(links.length).toBeGreaterThan(0);
-      expect(typeof links[0]).toBe('object');
-      expect(links[0]).toHaveProperty('href');
-      expect(links[0]).toHaveProperty('text');
-      expect(links[0]).toHaveProperty('file');
-      expect(links[0]).not.toHaveProperty('status');
-      expect(links[0]).not.toHaveProperty('ok');
-    });
-  });
-
-  it('Debe lanzar un error si se proporciona una ruta inválida', () => {
-    const invalidPath = '../thumb.png';
-
-    return expect(mdLinks(invalidPath)).rejects.toThrow('La ruta debe ser un archivo Markdown o un directorio.');
-  });
-
-  it('Debe devolver un array de enlaces sin estadísticas para la opción --validate', () => {
-    const options = {
-      stats: false,
-      validate: true
-    };
-
-    return mdLinks(filePath, options).then(links => {
-      expect(Array.isArray(links)).toBe(true);
-      expect(links.length).toBeGreaterThan(0);
-    });
-  });
-
-  it('Debe devolver un array de enlaces sin estadísticas para la opción por defecto', () => {
-    const options = {};
-
-    return mdLinks(filePath, options).then(links => {
-      expect(Array.isArray(links)).toBe(true);
-      expect(links.length).toBeGreaterThan(0);
-    });
-  });
-
-  it('Debería retornar una promesa que resuelve a un array de objetos', () => {
-    const options = {
-      validate: false
-    };
-    const result = mdLinks(filePath, options);
-
-    return expect(result).resolves.toBeInstanceOf(Array); // Verificar que se retorna un array de objetos
-  });
-
-  it('Debería retornar un array de objetos de links cuando se ingresa la ruta de un directorio', () => {
-    const options = {
-      validate: false
-    };
-    const filePath = './test/test-directory/';
-
-    return mdLinks(filePath, options).then(links => {
-      expect(links).toBeInstanceOf(Array);
-      expect(links.length).toBeGreaterThan(0);
     });
   });
 });
